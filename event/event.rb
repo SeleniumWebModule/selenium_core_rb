@@ -3,6 +3,10 @@ require_relative 'mouse'
 require_relative 'select'
 
 module Event
+  class General
+    FIND = FindBy.new
+  end
+
   class Keyboard
   	INSTANCE = KeyboardEvent.new
   end
@@ -13,5 +17,5 @@ module Event
 
   class SelectItem
   	INSTANCE = SelectEvent.new
-  end
+  end 
 end
