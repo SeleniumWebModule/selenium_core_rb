@@ -1,7 +1,5 @@
-require 'mdfind'
-
 module FIND
-	class FindById
-		puts "findl...."
-	end
+	:ById
+	:ByName
+	:ByClass
 end
