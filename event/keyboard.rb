@@ -1,5 +1,7 @@
-class KeyboardEvent 
-	def findBy(value, type)
-		puts value
+require_relative 'default'
+
+class KeyboardEvent < Default
+	def findBy
+		puts super.find
 	end
 end

@@ -1,7 +1,5 @@
-require_relative "../find/mdfind"
-
 class FindBy
-	def initialize(FIND)
-		puts FIND
+	def by(attr)
+		puts "Inicializando busca por #{attr}"
 	end 
 end

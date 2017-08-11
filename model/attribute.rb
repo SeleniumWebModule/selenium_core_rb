@@ -1,3 +1,3 @@
-class Attribute 
-	
+protected class Attribute 
+
 end

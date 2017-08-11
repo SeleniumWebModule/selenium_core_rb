@@ -1,13 +1,14 @@
 require_relative 'keyboard'
 require_relative 'mouse'
 require_relative 'select'
+require_relative '../model/findby'
 
 module Event
-  class General
+  class Default
     FIND = FindBy.new
   end
 
-  class Keyboard
+  class Keyboard < Default
   	INSTANCE = KeyboardEvent.new
   end
 

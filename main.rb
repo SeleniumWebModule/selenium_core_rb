@@ -1,5 +1,7 @@
 #require "selenium-webdriver"
-require_relative 'event/event'
+#require_relative 'event/event'
+require_relative 'model/model'
+require_relative 'model/view'
 
 #driver = Selenium::WebDriver.for :chrome
 #driver.navigate.to "http://189.3.216.130:8080/ventaboletosadm"
@@ -16,6 +18,11 @@ require_relative 'event/event'
 
 #driver.quit
 
-event = Event::Keyboard::INSTANCE
-event.findBy('teste', '123')
+#event = Event::Keyboard::INSTANCE
+#puts event
+
+view = Model::View::INSTANCE
+puts view.findBy
+
+#puts Event::Keyboard::FIND.by('id')
 
