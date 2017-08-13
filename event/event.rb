@@ -4,10 +4,7 @@ require_relative 'select'
 require_relative '../model/findby'
 
 module Event
-  class Default
-    FIND = FindBy.new
-  end
-
+  
   class Keyboard < Default
   	INSTANCE = KeyboardEvent.new
   end

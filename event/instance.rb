@@ -1,0 +1,3 @@
+class SeleniumInstance
+
+end

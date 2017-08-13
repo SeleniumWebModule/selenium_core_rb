@@ -1,3 +1,3 @@
-class SelectEvent
+class SelectEvent < Default
 
 end

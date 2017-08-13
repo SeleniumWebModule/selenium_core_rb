@@ -1,0 +1,3 @@
+class ComboboxEvent < SelectEvent
+
+end
