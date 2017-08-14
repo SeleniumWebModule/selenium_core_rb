@@ -1,0 +1,3 @@
+class RuleComponentPosLoad
+
+end

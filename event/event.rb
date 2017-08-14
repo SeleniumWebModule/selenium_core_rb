@@ -3,8 +3,7 @@ require_relative 'mouse'
 require_relative 'select'
 require_relative '../model/findby'
 
-module Event
-  
+module Event 
   class Keyboard < Default
   	INSTANCE = KeyboardEvent.new
   end
