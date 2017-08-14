@@ -1,14 +1,12 @@
 require "selenium-webdriver"
 
 class Instance
-	def initialize
+	def initialize(url, port, context)
 		@driver = Selenium::WebDriver.for :chrome
-		self.openSession
+		openSession(url, port, context)
 	end
 
-	def self.openSession
-		@driver.navigate.to "http://189.3.216.130:8080/ventaboletosadm"
+	def openSession(url, port, context)
+		@driver.navigate.to "http://#{url}:#{port}/context"
 	end
-
-	attr_accessor :driver
 end

@@ -1,5 +1,5 @@
 require_relative 'default' 
 
-class SeleniumView < Default
+class SeleniumScreen < Default
 	
 end
