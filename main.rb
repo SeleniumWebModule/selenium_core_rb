@@ -2,9 +2,7 @@
 #require_relative 'event/event'
 require_relative 'model/model'
 #require_relative 'model/view'
-require_relative 'model/findby'
-require_relative 'model/identifyby'
-require_relative 'selenium/selenium'
+
 
 #driver = Selenium::WebDriver.for :chrome
 #driver.navigate.to "http://189.3.216.130:8080/ventaboletosadm"
@@ -35,5 +33,6 @@ require_relative 'selenium/selenium'
 
 #puts Event::Keyboard::FIND.by('id')
 
-Selenium::INSTANCE
-
+system = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm')
+screen = Model::Screen.new('Login')
+puts screen.instance.name
