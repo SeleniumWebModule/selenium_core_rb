@@ -7,6 +7,9 @@ class SeleniumInstance
 	end
 
 	def openSession(url, port, context)
-		@driver.navigate.to "http://#{url}:#{port}/context"
+		@driver.navigate.to "http://#{url}:#{port}/#{context}"
+		@driver.manage.timeouts.page_load = 3000
 	end
+
+	attr_accessor :driver
 end

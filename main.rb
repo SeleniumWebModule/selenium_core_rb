@@ -34,13 +34,18 @@ require_relative 'model/identifyby'
 
 #puts Event::Keyboard::FIND.by('id')
 
-system = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm')
-screenLogin = Model::Screen.new('Login')
+seleniumSystem = Model::System.new('127.0.0.1', '8080', 'ventaboletosadm').instance
+screenLogin = Model::Screen.new('Login', Array.new).instance
 
-userFindBy = Model::FindBy.new(Identify::NAME, 'j_username')
-attrUser = Model::Attribute.new('value','gleimar', userFindBy)
-user = Model::Component.new('user', attrUser)
-user.registerEvent(Event::Keypress.new(user, Array.new))
+userFindBy = Model::FindBy.new(IdentifyBy::NAME, 'j_username').instance
+attrUser = Model::Attribute.new('value','gleimar', userFindBy).instance
+user = Model::Component.new('user', attrUser).instance
+user.registerEvent(Event::Keypress::INSTANCE)
+
+screenLogin.registerComponent(user)
+seleniumSystem.registerScreen(screenLogin)
+
+seleniumSystem.validate
 
 #btnAcesso = Model::Component.new('Acesso')
 
