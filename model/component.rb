@@ -1,5 +1,5 @@
 require_relative 'default' 
 
-protected class Component < Default
+class Component < Default
 
 end

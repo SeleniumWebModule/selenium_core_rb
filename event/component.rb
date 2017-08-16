@@ -1,3 +1,0 @@
-class ComponentEvent
-
-end

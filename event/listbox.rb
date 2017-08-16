@@ -1,3 +1,0 @@
-class ListboxEvent < SelectEvent
-
-end

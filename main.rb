@@ -1,6 +1,7 @@
 #require "selenium-webdriver"
-#require_relative 'event/event'
+require_relative 'event/event'
 require_relative 'model/model'
+require_relative 'model/identifyby'
 #require_relative 'model/view'
 
 
@@ -34,5 +35,12 @@ require_relative 'model/model'
 #puts Event::Keyboard::FIND.by('id')
 
 system = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm')
-screen = Model::Screen.new('Login')
-puts screen.instance.name
+screenLogin = Model::Screen.new('Login')
+
+userFindBy = Model::FindBy.new(Identify::NAME, 'j_username')
+attrUser = Model::Attribute.new('value','gleimar', userFindBy)
+user = Model::Component.new('user', attrUser)
+user.registerEvent(Event::Keypress.new(user, Array.new))
+
+#btnAcesso = Model::Component.new('Acesso')
+

@@ -2,15 +2,14 @@ require_relative 'attribute'
 require_relative '../selenium/selenium'
 
 class Default
-	def initialize(name)
+	def initialize(name, attribute)
 		@name = name
-		@attributes = Array.new
-		@me = Selenium
+		#@attributes = Array.new
 	end
 
-	def registerAttribute(attribute)
-		@attributes.push(attribute)
-	end
+	#def registerAttribute(attribute)
+	#	@attributes.push(attribute)
+	#end
 
 	def associateParent(parent)
 		@parent = parent
@@ -20,5 +19,9 @@ class Default
 		@childs = Array.new
 	end 
 
-	attr_accessor :attributes, :name, :parent, :childs
+	def registerEvent(event)
+		@event = event
+	end
+
+	attr_accessor :attribute, :name, :event, :parent, :childs
 end

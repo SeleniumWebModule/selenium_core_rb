@@ -1,3 +1,0 @@
-class ComboboxEvent < SelectEvent
-
-end

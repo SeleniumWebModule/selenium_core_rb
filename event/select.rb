@@ -1,3 +1,0 @@
-class SelectEvent < Default
-
-end

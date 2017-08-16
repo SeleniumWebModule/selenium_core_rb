@@ -1,18 +1,10 @@
-require_relative 'keyboard'
-require_relative 'mouse'
-require_relative 'select'
+require_relative 'keyboard/keypressevent'
 require_relative '../model/findby'
 
 module Event 
-  class Keyboard < Default
-  	INSTANCE = KeyboardEvent.new
-  end
-
-  class Mouse
-  	INSTANCE = MouseEvent.new
-  end
-
-  class SelectItem
-  	INSTANCE = SelectEvent.new
-  end 
+  class Keypress 
+  	def initialize(component, rules)
+  		@instance = KeypressEvent.new(component, rules)
+  	end
+  end  
 end

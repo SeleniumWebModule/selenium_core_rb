@@ -1,6 +1,6 @@
 require "selenium-webdriver"
 
-class Instance
+class SeleniumInstance
 	def initialize(url, port, context)
 		@driver = Selenium::WebDriver.for :chrome
 		openSession(url, port, context)
