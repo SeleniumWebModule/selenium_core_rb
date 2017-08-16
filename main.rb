@@ -34,7 +34,7 @@ require_relative 'model/identifyby'
 
 #puts Event::Keyboard::FIND.by('id')
 
-seleniumSystem = Model::System.new('127.0.0.1', '8080', 'ventaboletosadm').instance
+seleniumSystem = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm').instance
 screenLogin = Model::Screen.new('Login', Array.new).instance
 
 userFindBy = Model::FindBy.new(IdentifyBy::NAME, 'j_username').instance
