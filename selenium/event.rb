@@ -2,6 +2,7 @@ require "selenium-webdriver"
 
 require_relative "instance"
 require_relative "../model/identifyby"
+require_relative "../model/getvalueby"
  
 class SeleniumEvent
 	def findElement(findBy)
@@ -10,11 +11,22 @@ class SeleniumEvent
 
 	def findElements(findBy, id, value)
 		elements = $seleniumInstance.driver.find_elements("#{findBy.identifyBy}": "#{findBy.value}")
-		
+
 		for element in elements
-			if element.attribute("#{id}") == value
-				return element
-			end
+			case id
+				when GetValueBy::TAG_NAME
+					if element.tag_name == value
+						return element
+					end
+				when GetValueBy::TEXT
+					if element.text.strip! == value
+						return element
+					end
+				else
+					if element.attribute("#{id}") == value
+						return element
+					end
+				end
 		end
 	end
 
@@ -24,7 +36,7 @@ class SeleniumEvent
 		for element in elements
 			for lookingForItem in lookingFor
 				case lookingForItem.identifyBy
-					when IdentifyBy::TAG_NAME
+					when GetValueBy::TAG_NAME
 						if element.tag_name == lookingForItem.value
 							childs.push(element)		
 						end
@@ -50,7 +62,7 @@ class SeleniumEvent
 		for element in elements
 			for lookingForItem in lookingFor
 				case lookingForItem.identifyBy
-					when IdentifyBy::TAG_NAME
+					when GetValueBy::TAG_NAME
 						if element.tag_name == lookingForItem.value
 							childs.push(element)		
 						end
