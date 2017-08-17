@@ -6,8 +6,10 @@ class Default
 		@parent = parent
 	end
 
-	def associateChilds()
-		@childs = Array.new
+	def associateChilds(newChilds)
+		for childItem in newChilds
+			@childs.push(childItem)
+		end
 	end 
 
 	def registerEvent(event)
