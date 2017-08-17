@@ -15,5 +15,12 @@ class SeleniumSystem
 		@screens.each{|screen| screen.validate}
 	end
 
+	def mapMenu(findBy)
+		lookingFor = Array.new
+		lookingFor.push("button")
+		
+		Selenium::Event::INSTANCE.findChilds(findBy, lookingFor)
+	end
+
 	attr_accessor :screens
 end
