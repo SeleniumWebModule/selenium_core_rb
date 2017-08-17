@@ -1,10 +1,12 @@
 require_relative '../selenium/selenium'
+require_relative 'default'
 
-class SeleniumSystem
+class SeleniumSystem < Default
 	def initialize(url, port, context)
 		Selenium::Session.new(url, port, context)
 		@screens = Array.new
 		@rules = Array.new
+		@childs = Array.new
 	end
 
 	def registerScreen(screen)
@@ -17,9 +19,9 @@ class SeleniumSystem
 
 	def mapMenu(findBy)
 		lookingFor = Array.new
-		lookingFor.push("button")
+		lookingFor.push(Model::FindBy.new(IdentifyBy::TAG_NAME, 'button').instance)
 		
-		Selenium::Event::INSTANCE.findChilds(findBy, lookingFor)
+		associateChilds(Selenium::Event::INSTANCE.findChilds(findBy, lookingFor))
 	end
 
 	attr_accessor :screens
