@@ -2,6 +2,7 @@
 require_relative 'event/event'
 require_relative 'model/model'
 require_relative 'model/identifyby'
+require_relative 'rule/rule'
 #require_relative 'model/view'
 
 
@@ -35,16 +36,30 @@ require_relative 'model/identifyby'
 #puts Event::Keyboard::FIND.by('id')
 
 seleniumSystem = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm').instance
-screenLogin = Model::Screen.new('Login', Array.new).instance
+screenLogin = Model::Screen.new('Login').instance
 
 userFindBy = Model::FindBy.new(IdentifyBy::NAME, 'j_username').instance
-attrUser = Model::Attribute.new('value','gleimar', userFindBy).instance
-user = Model::Component.new('user', attrUser).instance
+user = Model::Component.new('user').instance
+user.registerAttribute(Model::Attribute.new('findBy', userFindBy))
+user.registerAttribute(Model::Attribute.new('value', 'gleimar'))
 user.registerEvent(Event::Keypress::INSTANCE)
-
 screenLogin.registerComponent(user)
-seleniumSystem.registerScreen(screenLogin)
 
+passUserFindBy = Model::FindBy.new(IdentifyBy::NAME, 'j_password').instance
+passUser = Model::Component.new('password').instance
+passUser.registerAttribute(Model::Attribute.new('findBy', passUserFindBy))
+passUser.registerAttribute(Model::Attribute.new('value', 'gleimar'))
+passUser.registerEvent(Event::Keypress::INSTANCE)
+screenLogin.registerComponent(passUser)
+
+btnAcessoFindBy = Model::FindBy.new(IdentifyBy::TAG_NAME, 'input').instance
+btnAcesso = Model::Component.new('acesso').instance
+btnAcesso.registerAttribute(Model::Attribute.new('findBy', btnAcessoFindBy))
+btnAcesso.registerAttribute(Model::Attribute.new('value', 'Acesso'))
+btnAcesso.registerEvent(Event::MouseClick::INSTANCE)
+screenLogin.registerComponent(btnAcesso)
+
+seleniumSystem.registerScreen(screenLogin)
 seleniumSystem.validate
 
 #btnAcesso = Model::Component.new('Acesso')
