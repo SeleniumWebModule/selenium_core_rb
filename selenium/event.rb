@@ -19,10 +19,11 @@ class SeleniumEvent
 						return element
 					end
 				when GetValueBy::TEXT
-					if element.text.strip! == value
+					if element.text.strip == value
 						return element
 					end
 				else
+					puts id
 					if element.attribute("#{id}") == value
 						return element
 					end
