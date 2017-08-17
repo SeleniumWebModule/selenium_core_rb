@@ -66,8 +66,8 @@ def login
 	return screenLogin
 end
 
-def openUserAdd
-	screenUserAdd = Model::Screen.new('Usuário').instance
+def openUserScreen
+	userScreen = Model::Screen.new('Usuário').instance
 	
 	mnuSeguranca = Model::Component.new('mnuSeguranca').instance
 	mnuSegurancaFindBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menu-btn').instance
@@ -75,14 +75,34 @@ def openUserAdd
 	mnuSeguranca.registerAttribute(Model::Attribute.new('getValueBy', GetValueBy::TEXT))
 	mnuSeguranca.registerAttribute(Model::Attribute.new('text', 'Segurança'))
 	mnuSeguranca.registerEvent(Event::MouseClick::INSTANCE)
-	screenUserAdd.registerComponent(mnuSeguranca)
+	userScreen.registerComponent(mnuSeguranca)
 
-	return screenUserAdd
+	mnuUsuario = Model::Component.new('mnuUsuario').instance
+	mnuUsuarioFindBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menu-item-cnt').instance
+	mnuUsuario.registerAttribute(Model::Attribute.new('findBy', mnuUsuarioFindBy))
+	mnuUsuario.registerAttribute(Model::Attribute.new('getValueBy', GetValueBy::TEXT))
+	mnuUsuario.registerAttribute(Model::Attribute.new('text', 'Usuário'))
+	mnuUsuario.registerEvent(Event::MouseClick::INSTANCE)
+	userScreen.registerComponent(mnuUsuario)	
+
+	btnUserAdd = Model::Component.new('Cadastrar Usuário').instance
+	btnUserAddFindBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-button-os').instance
+	btnUserAdd.registerAttribute(Model::Attribute.new('findBy', btnUserAddFindBy))
+	btnUserAdd.registerAttribute(Model::Attribute.new('getValueBy', GetValueBy::TITLE))
+	btnUserAdd.registerAttribute(Model::Attribute.new('title', 'Incluir'))
+	btnUserAdd.registerEvent(Event::MouseClick::INSTANCE)
+	userScreen.registerComponent(btnUserAdd)
+
+	return userScreen
 end
+
+#def openUserAdd
+#	userAdd = Model::Screen.new('Cadastro de Usuário').instance
+#end
 
 seleniumSystem = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm').instance
 seleniumSystem.registerScreen(login)
-seleniumSystem.registerScreen(openUserAdd)
+seleniumSystem.registerScreen(openUserScreen)
 seleniumSystem.validate
 #seleniumSystem.mapMenu(Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menubar-hor').instance);
 
