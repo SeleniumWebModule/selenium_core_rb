@@ -69,3 +69,4 @@ seleniumSystem = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm').i
 seleniumSystem.registerScreen(login)
 seleniumSystem.validate
 seleniumSystem.mapMenu(Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menubar-hor').instance);
+
