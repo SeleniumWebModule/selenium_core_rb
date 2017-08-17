@@ -4,4 +4,5 @@ module GetValueBy
 	ATTRIBUTE = 'attribute'
 	TEXT      = 'text'
 	VALUE     = 'value'
+	TITLE     = 'title'
 end
