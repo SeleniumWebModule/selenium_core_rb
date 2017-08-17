@@ -58,6 +58,7 @@ def login
 	btnAcessoFindBy = Model::FindBy.new(IdentifyBy::TAG_NAME, 'input').instance
 	btnAcesso = Model::Component.new('acesso').instance
 	btnAcesso.registerAttribute(Model::Attribute.new('findBy', btnAcessoFindBy))
+	btnAcesso.registerAttribute(Model::Attribute.new('getValueBy', GetValueBy::VALUE))
 	btnAcesso.registerAttribute(Model::Attribute.new('value', 'Acesso'))
 	btnAcesso.registerEvent(Event::MouseClick::INSTANCE)
 	screenLogin.registerComponent(btnAcesso)
@@ -65,8 +66,23 @@ def login
 	return screenLogin
 end
 
+def openUserAdd
+	screenUserAdd = Model::Screen.new('Usuário').instance
+	
+	mnuSeguranca = Model::Component.new('mnuSeguranca').instance
+	mnuSegurancaFindBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menu-btn').instance
+	mnuSeguranca.registerAttribute(Model::Attribute.new('findBy', mnuSegurancaFindBy))
+	mnuSeguranca.registerAttribute(Model::Attribute.new('getValueBy', GetValueBy::TEXT))
+	mnuSeguranca.registerAttribute(Model::Attribute.new('text', 'Segurança'))
+	mnuSeguranca.registerEvent(Event::MouseClick::INSTANCE)
+	screenUserAdd.registerComponent(mnuSeguranca)
+
+	return screenUserAdd
+end
+
 seleniumSystem = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm').instance
 seleniumSystem.registerScreen(login)
+seleniumSystem.registerScreen(openUserAdd)
 seleniumSystem.validate
-seleniumSystem.mapMenu(Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menubar-hor').instance);
+#seleniumSystem.mapMenu(Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menubar-hor').instance);
 
