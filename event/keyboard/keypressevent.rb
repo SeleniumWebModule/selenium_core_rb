@@ -1,8 +1,12 @@
+require_relative '../default'
 require_relative '../../selenium/selenium'
 
-class KeypressEvent
+class KeypressEvent < Default
 	def doAction(component, rules)
-		element = Selenium::Event::INSTANCE.findElement(component.attribute)
-		element.send_keys component.attribute.value
+		attrFindBy = findAttribute(component.attributes, "findBy")
+		element = Selenium::Event::INSTANCE.findElement(attrFindBy.value)
+
+		attrValue = findAttribute(component.attributes, "value")
+		element.send_keys attrValue.value
 	end
 end
