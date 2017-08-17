@@ -18,17 +18,24 @@ class SeleniumEvent
 		end
 	end
 
-	def findChildsByChilds(element, childs, lookingFor)
+	def findChildsByChild(element, childs, lookingFor)
 		elements = element.find_elements(:xpath, "./child::*")
 
 		for element in elements
-			for lookingForAttr in lookingFor
-				if element.attribute("#{lookingForAttr}")
-					childs.push(element)
-				end
+			for lookingForItem in lookingFor
+				case lookingForItem.identifyBy
+					when IdentifyBy::TAG_NAME
+						if element.tag_name == lookingForItem.value
+							childs.push(element)		
+						end
+					else
+						if element.attribute("#{lookingForItem.identifyBy}") == lookingForItem.value
+							childs.push(element)		
+						end
+					end
 			end
 
-			return findChildsByChilds(element, childs, lookingFor)
+			findChildsByChild(element, childs, lookingFor)
 		end
 
 		return childs
@@ -41,13 +48,20 @@ class SeleniumEvent
 		childs = Array.new
 
 		for element in elements
-			for lookingForAttr in lookingFor
-				if element.attribute("#{lookingForAttr}")
-					childs.push(element)
-				end
+			for lookingForItem in lookingFor
+				case lookingForItem.identifyBy
+					when IdentifyBy::TAG_NAME
+						if element.tag_name == lookingForItem.value
+							childs.push(element)		
+						end
+					else
+						if element.attribute("#{lookingForItem.identifyBy}") == lookingForItem.value
+							childs.push(element)		
+						end
+					end
 			end
 
-			return findChildsByChilds(element, childs, lookingFor)
+			findChildsByChild(element, childs, lookingFor)
 		end
 
 		return childs
