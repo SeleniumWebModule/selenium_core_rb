@@ -2,14 +2,18 @@ require_relative 'default'
 
 class SeleniumScreen < Default
 
-	def initialize(name, attribute)
+	def initialize(name)
 		@name = name
-		@attribute = attribute
+		@attributes = Array.new
 		@components = Array.new
 	end
 
 	def registerComponent(component)
 		@components.push(component)
+	end
+
+	def validate
+		@components.each{|component| component.validate}
 	end
 
 	attr_accessor :components, :attribute

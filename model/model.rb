@@ -14,24 +14,24 @@ module Model
 	end
 
 	class Screen
-		def initialize(name, attribute)
-			@instance = SeleniumScreen.new(name, attribute)
+		def initialize(name)
+			@instance = SeleniumScreen.new(name)
 		end
 		
 		attr_accessor :instance
 	end
 
 	class Component
-		def initialize(name, attribute)
-			@instance = SeleniumComponent.new(name, attribute)
+		def initialize(name)
+			@instance = SeleniumComponent.new(name)
 		end
 
 		attr_accessor :instance
 	end
 
 	class Attribute
-		def initialize(id, value, findBy)
-			@instance = SeleniumAttribute.new(id, value, findBy)
+		def initialize(id, value)
+			@instance = SeleniumAttribute.new(id, value)
 		end
 
 		attr_accessor :instance

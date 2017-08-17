@@ -14,5 +14,13 @@ class Default
 		@event = event
 	end
 
+	def registerAttribute(attribute)
+		@attributes.push(attribute.instance)
+	end
+
+	def registerRule(rule)
+		@rules.push(rule)
+	end
+
 	attr_accessor :event, :parent, :childs
 end

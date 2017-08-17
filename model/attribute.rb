@@ -1,9 +1,8 @@
 class SeleniumAttribute 
-	def initialize(id, value, findBy)
+	def initialize(id, value)
 		@id = id
 		@value = value
-		@findBy = findBy
 	end
 
-	attr_accessor :id, :value, :findBy
+	attr_accessor :id, :value
 end

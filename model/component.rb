@@ -1,10 +1,15 @@
 require_relative 'default' 
 
 class SeleniumComponent < Default
-	def initialize(name, attribute)
+	def initialize(name)
 		@name = name
-		@attribute = attribute
+		@attributes = Array.new
+		@rules = Array.new
 	end
 
-	attr_accessor :name, :attribute
+	def validate
+		self.event.doAction(self, @rules)
+	end
+
+	attr_accessor :name, :attributes
 end
