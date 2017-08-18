@@ -1,41 +1,7 @@
-#require "selenium-webdriver"
 require_relative 'event/event'
 require_relative 'model/model'
 require_relative 'model/identifyby'
 require_relative 'rule/rule'
-#require_relative 'model/view'
-
-
-#driver = Selenium::WebDriver.for :chrome
-#driver.navigate.to "http://189.3.216.130:8080/ventaboletosadm"
-
-#element = driver.find_element(name: 'j_username')
-#element.send_keys ""
-
-#element = driver.find_element(name: 'j_password')
-#element.send_keys ""
-
-#element.submit
-
-#puts driver.title
-
-#driver.quit
-
-#event = Event::Keyboard::INSTANCE
-#puts event
-
-#attribute = Model::Attribute.new.INSTANCE('name', 'Login', FindBy.new)
-#view = Model::View::INSTANCE
-#view.registerAttribute(attribute)
-
-#puts IdentifyBy::CLASS_NAME
-
-#attribute = Model::View::INSTANCE()
-#puts attribute
-
-#puts Event::Keyboard::FIND.by('id')
-
-#btnAcesso = Model::Component.new('Acesso')
 
 def login
 	
@@ -66,8 +32,8 @@ def login
 	return screenLogin
 end
 
-def openUserScreen
-	userScreen = Model::Screen.new('Usuário').instance
+def openUserAdd
+	userAdd = Model::Screen.new('Usuário').instance
 	
 	mnuSeguranca = Model::Component.new('mnuSeguranca').instance
 	mnuSegurancaFindBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menu-btn').instance
@@ -75,7 +41,7 @@ def openUserScreen
 	mnuSeguranca.registerAttribute(Model::Attribute.new('getValueBy', GetValueBy::TEXT))
 	mnuSeguranca.registerAttribute(Model::Attribute.new('text', 'Segurança'))
 	mnuSeguranca.registerEvent(Event::MouseClick::INSTANCE)
-	userScreen.registerComponent(mnuSeguranca)
+	userAdd.registerComponent(mnuSeguranca)
 
 	mnuUsuario = Model::Component.new('mnuUsuario').instance
 	mnuUsuarioFindBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menu-item-cnt').instance
@@ -83,7 +49,7 @@ def openUserScreen
 	mnuUsuario.registerAttribute(Model::Attribute.new('getValueBy', GetValueBy::TEXT))
 	mnuUsuario.registerAttribute(Model::Attribute.new('text', 'Usuário'))
 	mnuUsuario.registerEvent(Event::MouseClick::INSTANCE)
-	userScreen.registerComponent(mnuUsuario)	
+	userAdd.registerComponent(mnuUsuario)	
 
 	btnUserAdd = Model::Component.new('Cadastrar Usuário').instance
 	btnUserAddFindBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-button-os').instance
@@ -91,18 +57,42 @@ def openUserScreen
 	btnUserAdd.registerAttribute(Model::Attribute.new('getValueBy', GetValueBy::TITLE))
 	btnUserAdd.registerAttribute(Model::Attribute.new('title', 'Incluir'))
 	btnUserAdd.registerEvent(Event::MouseClick::INSTANCE)
-	userScreen.registerComponent(btnUserAdd)
+	userAdd.registerComponent(btnUserAdd)
 
-	return userScreen
+	return userAdd
 end
 
-#def openUserAdd
-#	userAdd = Model::Screen.new('Cadastro de Usuário').instance
-#end
+def populateUserAdd
+	newuser = Model::Screen.new('Cadastro de Usuário').instance
+
+	fieldLogin = Model::Component.new('login').instance
+	
+	#parent
+	fieldLoginFindParentBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-tab-text').instance
+	fieldLogin.registerAttribute(Model::Attribute.new('findParentBy', fieldLoginFindParentBy))
+	fieldLogin.registerAttribute(Model::Attribute.new('getParentValueBy', GetValueBy::TEXT))
+	fieldLogin.registerAttribute(Model::Attribute.new('parentID', 'text'))
+	fieldLogin.registerAttribute(Model::Attribute.new('parentValue', 'Usuário'))
+
+	#simbling
+	fieldLoginFindSiblingBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-label').instance
+	fieldLogin.registerAttribute(Model::Attribute.new('findSiblingBy', fieldLoginFindSiblingBy))
+	fieldLogin.registerAttribute(Model::Attribute.new('getSiblingValueBy', GetValueBy::TEXT))
+	fieldLogin.registerAttribute(Model::Attribute.new('parentID', 'text'))
+	fieldLogin.registerAttribute(Model::Attribute.new('parentValue', 'Login'))	
+
+	fieldLoginFindBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-textbox').instance
+	fieldLogin.registerAttribute(Model::Attribute.new('findBy', fieldLoginFindBy))
+	fieldLogin.registerEvent(Event::Keypress::INSTANCE)
+	newuser.registerComponent(fieldLogin)
+
+	return newuser
+end
 
 seleniumSystem = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm').instance
 seleniumSystem.registerScreen(login)
-seleniumSystem.registerScreen(openUserScreen)
+seleniumSystem.registerScreen(openUserAdd)
+#seleniumSystem.registerScreen(populateUserAdd)
 seleniumSystem.validate
 #seleniumSystem.mapMenu(Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menubar-hor').instance);
 
