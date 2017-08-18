@@ -6,6 +6,8 @@ class Default
 		for attribute in attributes
 			 return attribute if attribute.id == key
 		end
+
+		return nil
 	end
 
 	def identifyAttrByGetValueBy(attributes)
@@ -13,6 +15,8 @@ class Default
 			next if attribute.id != "getValueBy"
 			return attribute
 		end
+
+		return nil
 	end
 
 	def getSeleniumEvent
