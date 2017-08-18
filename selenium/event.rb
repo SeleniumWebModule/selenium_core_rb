@@ -82,4 +82,8 @@ class SeleniumEvent
 
 		return childs
 	end
+
+	def saveScreenshot(name)
+		$seleniumInstance.driver.save_screenshot("evidencias/#{name}.png")
+	end
 end
