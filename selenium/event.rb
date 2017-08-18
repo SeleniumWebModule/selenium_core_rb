@@ -12,6 +12,10 @@ class SeleniumEvent
 	def findElements(findBy, id, value)
 		elements = $seleniumInstance.driver.find_elements("#{findBy.identifyBy}": "#{findBy.value}")
 
+		if elements.length == 0
+			return findElements(findBy, id, value)
+		end
+
 		for element in elements
 			case id
 				when GetValueBy::TAG_NAME
@@ -23,8 +27,7 @@ class SeleniumEvent
 						return element
 					end
 				else
-					puts id
-					if element.attribute("#{id}") == value
+					if element.attribute(id).strip == value
 						return element
 					end
 				end
