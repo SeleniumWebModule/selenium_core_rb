@@ -3,10 +3,11 @@ require_relative '../../selenium/selenium'
 
 class KeypressEvent < Default
 	def doAction(component, rules)
-		findParentBy = findAttribute(component.attributes, "findParentBy")
+		findSiblingBy = findAttribute(component.attributes, "findSiblingBy")
 
-		element = findParentBy != nil ? getElementByParent(component, findParentBy) :
-			 getElementWithoutParent(component)
+		element = findSiblingBy != nil ? doActionBySibling(component) : getElement(component)
+
+		return if findSiblingBy != nil	
 
 		attrValue = findAttribute(component.attributes, "value")
 
@@ -17,15 +18,10 @@ class KeypressEvent < Default
 		registerEvidence("#{component.name}-afterevent")	
 	end
 
-	def getElementByParent(component, findParentBy)
-		attrFindBy = findAttribute(component.attributes, "findBy")
-		parentID = findAttribute(component.attributes, "findBy")
-		parentValue = findAttribute(component.attributes, "findBy")
-		return getSeleniumEvent.findElements(attrFindBy.value, parentID.value, parentValue.value)
-	end
-
-	def getElementWithoutParent(component)
-		attrFindBy = findAttribute(component.attributes, "findBy")
-		return getSeleniumEvent.findElement(attrFindBy.value)
+	def doActionBySibling(component)
+		screenElement = getScreenElement(component);
+		
+		#puts screenElement.find_elements(:xpath, "./child::*").length
+		
 	end
 end

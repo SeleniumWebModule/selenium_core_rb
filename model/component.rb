@@ -5,6 +5,7 @@ class SeleniumComponent < Default
 		@name = name
 		@attributes = Array.new
 		@rules = Array.new
+		@elements = Array.new
 	end
 
 	def validate

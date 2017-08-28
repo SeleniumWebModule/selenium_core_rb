@@ -64,23 +64,27 @@ end
 
 def populateUserAdd
 	newuser = Model::Screen.new('Cadastro de Usuário').instance
-
 	fieldLogin = Model::Component.new('login').instance
 	
-	#parent
-	fieldLoginFindParentBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-tab-text').instance
-	fieldLogin.registerAttribute(Model::Attribute.new('findParentBy', fieldLoginFindParentBy))
-	fieldLogin.registerAttribute(Model::Attribute.new('getParentValueBy', GetValueBy::TEXT))
-	fieldLogin.registerAttribute(Model::Attribute.new('parentID', 'text'))
-	fieldLogin.registerAttribute(Model::Attribute.new('parentValue', 'Usuário'))
+	#screen
+	findScreenBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-window-highlighted').instance
+	fieldLogin.registerAttribute(Model::Attribute.new('findScreenBy', findScreenBy))
+	findTitleScreenBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-window-highlighted-header').instance
+	fieldLogin.registerAttribute(Model::Attribute.new('findTitleScreenBy', findTitleScreenBy))
+	fieldLogin.registerAttribute(Model::Attribute.new('screenID', GetValueBy::TEXT))
+	fieldLogin.registerAttribute(Model::Attribute.new('screenValue', 'Usuário'))
 
-	#simbling
+	#siblingParent
+	findParentSiblingBy = Model::FindBy.new(IdentifyBy::TAG_NAME, 'tr').instance
+	fieldLogin.registerAttribute(Model::Attribute.new('findParentSiblingBy', findParentSiblingBy))
+
+	#sibling
 	fieldLoginFindSiblingBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-label').instance
 	fieldLogin.registerAttribute(Model::Attribute.new('findSiblingBy', fieldLoginFindSiblingBy))
-	fieldLogin.registerAttribute(Model::Attribute.new('getSiblingValueBy', GetValueBy::TEXT))
-	fieldLogin.registerAttribute(Model::Attribute.new('parentID', 'text'))
-	fieldLogin.registerAttribute(Model::Attribute.new('parentValue', 'Login'))	
+	fieldLogin.registerAttribute(Model::Attribute.new('siblingID', GetValueBy::TEXT))
+	fieldLogin.registerAttribute(Model::Attribute.new('siblingValue', 'Login'))	
 
+	#Login
 	fieldLoginFindBy = Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-textbox').instance
 	fieldLogin.registerAttribute(Model::Attribute.new('findBy', fieldLoginFindBy))
 	fieldLogin.registerEvent(Event::Keypress::INSTANCE)
@@ -92,7 +96,7 @@ end
 seleniumSystem = Model::System.new('189.3.216.130', '8080', 'ventaboletosadm').instance
 seleniumSystem.registerScreen(login)
 seleniumSystem.registerScreen(openUserAdd)
-#seleniumSystem.registerScreen(populateUserAdd)
+seleniumSystem.registerScreen(populateUserAdd)
 seleniumSystem.validate
 #seleniumSystem.mapMenu(Model::FindBy.new(IdentifyBy::CLASS_NAME, 'z-menubar-hor').instance);
 

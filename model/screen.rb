@@ -6,6 +6,7 @@ class SeleniumScreen < Default
 		@name = name
 		@attributes = Array.new
 		@components = Array.new
+		@elements = Array.new
 	end
 
 	def registerComponent(component)
